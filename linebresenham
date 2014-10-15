@@ -1,0 +1,45 @@
+EXPORT linebresenham(x0,y0,x1,y1)
+BEGIN
+LOCAL i,x,y,dx,dy,unitx,unity;
+LOCAL abs_dx,abs_dy,e;
+dx:=x1-x0;
+dy:=y1-y0;
+abs_dx:=abs(dx);
+abs_dy:=abs(dy);
+unitx:=dx/abs_dx;
+unity:=dy/abs_dy;
+x:=x0;
+y:=y0;
+IF abs(dx)>1 OR abs(dy)>1
+THEN
+  IF abs_dx>abs_dy
+  THEN 
+    e:=-dx;
+    FOR i FROM 0 TO abs_dx DO
+      PIXON_P(G0,x,y,#FF0000);
+      x:=x+unitx;
+      e:=e+dy*2;
+      IF e≥0
+      THEN 
+      y:=y+unity;
+      e:=e-dx*2;
+      END;
+    END;
+  
+  ELSE
+    e:=-dy;  
+    FOR i FROM 0 TO abs_dy DO
+      PIXON_P(G0,x,y,#FF0000);
+      y:=y+unity;
+      e:=e+dx*2;
+      IF e≥0
+      THEN
+      x:=x+unitx;
+      e:=e-dy*2;
+      END;
+    END;
+  END;
+  PIXON_P(G0,x,y,#FF0000);
+  END;
+FREEZE;
+END;

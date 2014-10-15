@@ -1,0 +1,22 @@
+EXPORT linedda(x0,y0,x1,y1)
+BEGIN
+  LOCAL dx:=x1-x0,dy:=y1-y0;
+  LOCAL step,k;
+  LOCAL xIncrement,yIncrement,x:=x0,y:=y0;
+  IF abs(dx)>1 OR abs(dy)>1
+  THEN 
+    IF abs(dx)>abs(dy)
+    THEN step:=abs(dx);
+    ELSE step:=abs(dy);
+  END;
+  xIncrement:=dx/step;
+  yIncrement:=dy/step;
+  FOR k FROM 0 TO step DO
+    x:=x+xIncrement;
+    y:=y+yIncrement;
+    PIXON_P(G0,x,y,#FF0000);
+  END;
+  ELSE PIXON_P(G0,x,y,#FF0000);
+  END;
+  FREEZE;
+END;
