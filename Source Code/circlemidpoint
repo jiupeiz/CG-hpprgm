@@ -1,25 +1,31 @@
-EXPORT circlemidpoint(xc,yc,radius)
-BEGIN
-  LOCAL x,y,p;
+drawcircle(xc,yc,x,y);
+export circlemidpoint(xc,yc,radius)
+//----------------------------
+// START FUNCTION
+//----------------------------
+begin
+  local x,y,p;
   p:=1-radius;
   x:=0;
   y:=radius;
-    PIXON_P(G0,xc+x,yc+y,#FF0000);
-    PIXON_P(G0,xc-x,yc+y,#FF0000);
-    PIXON_P(G0,xc+x,yc-y,#FF0000);
-    PIXON_P(G0,xc-x,yc-y,#FF0000);
-    PIXON_P(G0,xc+y,yc+x,#FF0000);
-    PIXON_P(G0,xc-y,yc+x,#FF0000);
-    PIXON_P(G0,xc+y,yc-x,#FF0000);
-    PIXON_P(G0,xc-y,yc-x,#FF0000);
-  WHILE x<y DO
+  drawcircle(xc,yc,x,y);
+  while x<y do
     x:=x+1;
-    IF p<0
-    THEN p:=p+2*x+1;
-    ELSE 
+    if p<0
+    then p:=p+2*x+1;
+    else 
       y:=y-1;
       p:=p+2*(x-y)+1;
-    END;
+    end;
+  drawcircle(xc,yc,x,y);
+  end;
+  freeze;
+end;
+//----------------------------
+// DRAW CIRCLE
+//----------------------------
+drawcircle(xc,yc,x,y)
+begin
     PIXON_P(G0,xc+x,yc+y,#FF0000);
     PIXON_P(G0,xc-x,yc+y,#FF0000);
     PIXON_P(G0,xc+x,yc-y,#FF0000);
@@ -28,6 +34,4 @@ BEGIN
     PIXON_P(G0,xc-y,yc+x,#FF0000);
     PIXON_P(G0,xc+y,yc-x,#FF0000);
     PIXON_P(G0,xc-y,yc-x,#FF0000);
-  END;
-  FREEZE;
-END;
+end;

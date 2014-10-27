@@ -1,3 +1,4 @@
+drawellipse(xc,yc,x,y);
 EXPORT ellipsemidpoint(xc,yc,radiusx,radiusy)
 BEGIN
   LOCAL rx2:=radiusx*radiusx,ry2:=radiusy*radiusy;
@@ -7,10 +8,8 @@ BEGIN
   y:=radiusy;
   px:=0;
   py:=tworx2*y;
-  PIXON_P(G0,xc+x,yc+y,#FF0000);
-  PIXON_P(G0,xc-x,yc+y,#FF0000);
-  PIXON_P(G0,xc+x,yc-y,#FF0000);
-  PIXON_P(G0,xc-x,yc-y,#FF0000);
+  
+  drawellipse(xc,yc,x,y);
   p:=ROUND(ry2-rx2*radiusy+rx2*0.25,0);
   WHILE px<py DO
     x:=x+1;
@@ -22,10 +21,7 @@ BEGIN
       py:=py-tworx2;
       p:=p+ry2+px-py;
     END;
-    PIXON_P(G0,xc+x,yc+y,#FF0000);
-    PIXON_P(G0,xc-x,yc+y,#FF0000);
-    PIXON_P(G0,xc+x,yc-y,#FF0000);
-    PIXON_P(G0,xc-x,yc-y,#FF0000);
+  drawellipse(xc,yc,x,y);
   END;
   p:=ROUND(ry2*(x+0.5)*(x+0.5)+rx2*(y-1)*(y-1)-rx2*ry2,0);
   WHILE y>0 DO
@@ -38,10 +34,15 @@ BEGIN
       px:=twory2+px;
       p:=rx2-py+px+p;
     END;
-    PIXON_P(G0,xc+x,yc+y,#FF0000);
-    PIXON_P(G0,xc-x,yc+y,#FF0000);
-    PIXON_P(G0,xc+x,yc-y,#FF0000);
-    PIXON_P(G0,xc-x,yc-y,#FF0000);
+  drawellipse(xc,yc,x,y);
   END;
   FREEZE;
+END;
+
+drawellipse(xc,yc,x,y)
+BEGIN 
+  PIXON_P(G0,xc+x,yc+y,#FF0000);
+  PIXON_P(G0,xc-x,yc+y,#FF0000);
+  PIXON_P(G0,xc+x,yc-y,#FF0000);
+  PIXON_P(G0,xc-x,yc-y,#FF0000);
 END;
